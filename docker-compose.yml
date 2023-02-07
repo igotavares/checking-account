@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment: 
+      - MYSQL_ROOT_PASSWORD=admin#123
+      - MYSQL_DATABASE=checkingAccount
+      - MYSQL_USER=checkingAccountUser
+      - MYSQL_PASSWORD=user#123
+    networks:
+      - checking-account-network
+  app:
+    build:
+      context: .
+      args:
+        - SKIPTESTS=false
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:mysql://localhost:3306/checkingAccount
+      - DATABASE_USERNAME=checkingAccount
+      - DATABASE_PASSWORD=user#123
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+    networks:
+      - checking-account-network
+    depends_on:
+      - rabbitmq
+      - db
+  
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - checking-account-network
+
+networks:
+  checking-account-network:
