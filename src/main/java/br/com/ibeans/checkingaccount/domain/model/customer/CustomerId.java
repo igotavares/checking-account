@@ -7,12 +7,9 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class CustomerId implements Identity, Serializable {
 
     private String id;

@@ -22,8 +22,8 @@ public class GlobalResourceExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ErrorData methodException(ResourceNotFoundException cause) {
         return ErrorData.builder()
-                .title(HttpStatus.UNPROCESSABLE_ENTITY.name())
-                .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
+                .title(HttpStatus.NOT_FOUND.name())
+                .status(HttpStatus.NOT_FOUND.value())
                 .detail(cause.getMessage())
                 .timestamp(LocalDateTime.now().toString())
                 .build();

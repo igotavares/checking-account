@@ -4,7 +4,7 @@ services:
     image: mysql:8.0
     ports:
       - "3306:3306"
-    environment: 
+    environment:
       - MYSQL_ROOT_PASSWORD=admin#123
       - MYSQL_DATABASE=checkingAccount
       - MYSQL_USER=checkingAccountUser
@@ -19,26 +19,15 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=jdbc:mysql://localhost:3306/checkingAccount
-      - DATABASE_USERNAME=checkingAccount
-      - DATABASE_PASSWORD=user#123
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
-      - RABBITMQ_USERNAME=guest
-      - RABBITMQ_PASSWORD=guest
+      - DATASOURCE_URL=jdbc:mysql://db:3306/checkingAccount
+      - DATASOURCE_USERNAME=checkingAccountUser
+      - DATASOURCE_PASSWORD=user#123
+      - SERVICE_CUSTOMER_URI=http://localhost:8082/customers
+      - SERVICE_NOTIFICATION_TRANSACTION_URI=http://localhost:8082/transactions
     networks:
       - checking-account-network
     depends_on:
-      - rabbitmq
       - db
-  
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-    networks:
-      - checking-account-network
 
 networks:
   checking-account-network:

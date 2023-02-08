@@ -7,11 +7,9 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class AgencyId implements Identity, Serializable {
 
     private String id;

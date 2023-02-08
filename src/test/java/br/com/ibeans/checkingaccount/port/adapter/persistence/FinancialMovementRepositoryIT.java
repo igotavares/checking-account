@@ -53,6 +53,8 @@ class FinancialMovementRepositoryIT extends AbstractJPAIT {
                     .customerId(new CustomerId(CustomerConstants.ID_IS_ONE))
                     .build();
 
+            getEntityManager().persist(account);
+
             FinancialMovement financialMovement = FinancialMovement.builder()
                     .id(new FinancialMovementId(FinancialMovementConstants.ID_IS_ONE))
                     .from(new AccountId(AccountConstants.ID_IS_ONE))

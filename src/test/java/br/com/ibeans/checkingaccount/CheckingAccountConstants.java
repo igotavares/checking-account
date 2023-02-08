@@ -25,6 +25,7 @@ public interface CheckingAccountConstants {
     interface FinancialMovementConstants {
         String ID_IS_ONE = "eb511f18-8d9c-4a5c-bf6b-26ceb24b1ade";
         BigDecimal AMOUNT_IS_10 =  BigDecimal.valueOf(10L);
+        BigDecimal AMOUNT_IS_30 = BigDecimal.valueOf(30L);
     }
 
     interface AccountConstants {
@@ -34,9 +35,11 @@ public interface CheckingAccountConstants {
         Long NUMBER_IS_4321 =  4321L;
         Integer DIGIT_IS_1 =  1;
         Integer DIGIT_IS_2 =  2;
-        BigDecimal AMOUNT_IS_10 =  BigDecimal.valueOf(10L);
+        BigDecimal AMOUNT_IS_10 = BigDecimal.valueOf(10L);
         BigDecimal AMOUNT_IS_1000 =  BigDecimal.valueOf(1000L);
         BigDecimal AMOUNT_IS_20 =  BigDecimal.valueOf(20L);
+        BigDecimal AMOUNT_IS_0 =  BigDecimal.ZERO;
+        BigDecimal AMOUNT_IS_30 = BigDecimal.valueOf(30L);
     }
 
     interface  TransactionConstants {

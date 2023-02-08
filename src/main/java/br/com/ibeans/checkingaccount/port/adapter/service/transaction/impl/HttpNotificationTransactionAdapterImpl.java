@@ -8,6 +8,8 @@ import br.com.ibeans.checkingaccount.port.adapter.service.transaction.Translator
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
@@ -29,6 +31,7 @@ public class HttpNotificationTransactionAdapterImpl implements NotificationTrans
     }
 
     @Override
+    @Retryable(backoff = @Backoff(delay = 2000))
     public void toTransaction(Transaction transaction) {
         try {
             String body = transactionTranslator.from(transaction);

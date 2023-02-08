@@ -3,25 +3,23 @@ package br.com.ibeans.checkingaccount.port.adapter.resource;
 import br.com.ibeans.checkingaccount.CheckingAccountConstants.AccountConstants;
 import br.com.ibeans.checkingaccount.CheckingAccountConstants.AgencyConstants;
 import br.com.ibeans.checkingaccount.CheckingAccountConstants.CustomerConstants;
-import br.com.ibeans.checkingaccount.CheckingAccountConstants.DocumentConstants;
 import br.com.ibeans.checkingaccount.domain.model.account.Account;
 import br.com.ibeans.checkingaccount.domain.model.account.AccountId;
 import br.com.ibeans.checkingaccount.domain.model.agency.Agency;
 import br.com.ibeans.checkingaccount.domain.model.agency.AgencyId;
-import br.com.ibeans.checkingaccount.domain.model.customer.Customer;
 import br.com.ibeans.checkingaccount.domain.model.customer.CustomerId;
-import br.com.ibeans.checkingaccount.domain.model.customer.Document;
-import br.com.ibeans.checkingaccount.domain.model.customer.DocumentType;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.math.BigDecimal;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AccountResourceIT extends AbstractResourceIT {
 
@@ -46,7 +44,8 @@ public class AccountResourceIT extends AbstractResourceIT {
             getMvcMock().perform(post("/api/v1/accounts")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(account.toString()))
-                        .andExpect(status().isOk());
+                        .andExpect(status().isCreated())
+                        .andExpect(jsonPath("$.id").isNotEmpty());
         }
 
     }
